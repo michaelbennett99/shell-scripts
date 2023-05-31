@@ -8,6 +8,7 @@ if [[ $# -ne 1 ]]; then
 fi
 
 # Clone git repository
+echo "Cloning repository $1"
 git clone $1
 
 # Get directory name
@@ -17,10 +18,12 @@ name=${filename%%.*}
 echo $filename
 echo $name
 
+echo "Creating repository $name for user $USER"
 gh repo create $name --private
 
 cd $name
 
+echo "Setting up repository $name for user $USER"
 git remote set-url origin "git@github.com:$USER/$name.git"
 
 git push -u origin main
